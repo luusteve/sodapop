@@ -32,5 +32,7 @@ public class Product {
 
   @NonNull
   private BigDecimal weight;
+
+  private boolean isFragile;
   
 }

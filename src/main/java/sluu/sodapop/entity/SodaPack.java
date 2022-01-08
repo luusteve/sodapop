@@ -23,6 +23,8 @@ public class SodaPack extends Product {
 
   private Integer units;
 
+  private Integer volumePerUnit;
+
   private LocalDate expirationDate;
     
 }
