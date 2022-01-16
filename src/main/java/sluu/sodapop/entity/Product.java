@@ -11,11 +11,17 @@ import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.NaturalId;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @MappedSuperclass
+@SuperBuilder
 public class Product {
 
   @Id
@@ -32,6 +38,9 @@ public class Product {
 
   @NonNull
   private BigDecimal weight;
+
+  @NonNull
+  private Integer count;
 
   private boolean isFragile;
   

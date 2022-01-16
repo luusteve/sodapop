@@ -4,15 +4,27 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 
+import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@Data
+@AllArgsConstructor
+@SuperBuilder
+@Setter
+@Getter
+@TypeDef(
+    name = "pgsql_enum",
+    typeClass = PostgreSQLEnumType.class
+)
 public class SodaPack extends Product {
 
-  public enum BottlingType{
+  public enum BottlingType {
     CAN,
     PLASTIC,
     GLASS
@@ -21,7 +33,7 @@ public class SodaPack extends Product {
   @Type(type = "pgsql_enum")
   private BottlingType bottlingType;
 
-  private Integer units;
+  private Integer unitsPerPack;
 
   private Integer volumePerUnit;
 
