@@ -3,6 +3,9 @@ package sluu.sodapop.entity;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.Min;
 
 import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
 import org.hibernate.annotations.Type;
@@ -10,11 +13,13 @@ import org.hibernate.annotations.TypeDef;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @SuperBuilder
 @Setter
 @Getter
@@ -31,12 +36,13 @@ public class SodaPack extends Product {
   }
 
   @Type(type = "pgsql_enum")
+  @Enumerated(EnumType.STRING)
   private BottlingType bottlingType;
 
-  private Integer unitsPerPack;
+  @Min(1)
+  private int unitsPerPack;
 
-  private Integer volumePerUnit;
-
-  private LocalDate expirationDate;
+  @Min(1)
+  private int volumePerUnit;
     
 }

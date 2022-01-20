@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import sluu.sodapop.entity.SodaPack;
 
-public interface SodaPackRepository extends CrudRepository<SodaPack, String> {
+public interface SodaPackRepository extends CrudRepository<SodaPack, UUID> {
   
   SodaPack findSodaPackByUuid(UUID uuid);
 

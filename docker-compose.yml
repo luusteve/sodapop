@@ -1,0 +1,35 @@
+version: '3.2'
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    ports:
+      - '5432:5432'
+    environment:
+         - POSTGRES_PASSWORD=postgres
+         - POSTGRES_USER=postgres
+         - POSTGRES_DB=test
+
+  sodapop-api:
+    build:
+      context: .
+    container_name: app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/test
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update  
+
+  front:
+    container_name: front
+    build:
+      context: ./sodapop-frontend
+    volumes:
+      - ./sodapop-frontend:/usr/src/app/sodapop-frontend
+      - /usr/src/app/sodapop-frontend/node_modules
+    ports:
+      - '8087:8087'

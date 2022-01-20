@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -26,7 +28,7 @@ public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private int id;
 
   @NaturalId
   @NonNull
@@ -37,10 +39,11 @@ public class Product {
   private String name;
 
   @NonNull
+  @Digits(integer=5, fraction=2)
   private BigDecimal weight;
 
-  @NonNull
-  private Integer count;
+  @Min(0)
+  private int count;
 
   private boolean isFragile;
   
